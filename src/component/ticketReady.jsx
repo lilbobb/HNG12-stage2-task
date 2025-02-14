@@ -1,5 +1,5 @@
 import React from "react";
-import { getFromStorage } from "./StorageHelper";
+import { getFromStorage } from "./storageHelper";
 import { Link } from "react-router-dom";
 import BarCode from "../assets/BarCode.png";
 import subtract from "../assets/Subtract.png";
