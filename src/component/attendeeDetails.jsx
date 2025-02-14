@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { saveToStorage, getFromStorage } from "./StorageHelper";
+import { saveToStorage, getFromStorage } from "./storageHelper";
 import ProgressBar from "../component/progressBar";
 import { FaCloudArrowDown, FaEnvelope } from "react-icons/fa6";
 
