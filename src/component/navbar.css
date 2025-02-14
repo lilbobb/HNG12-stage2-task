@@ -1,0 +1,67 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 30px;
+  height: 80px;
+  background-color: #052f35;
+  border-radius: 24px;
+  border: 1px solid #197688;
+}
+
+.nav-left .logo {
+  height: 50px; 
+  width: auto;
+}
+
+.nav-center {
+  display: flex;
+  gap: 30px;
+  justify-content: center; 
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 768px) {
+  
+  .nav-center {
+    display: none;  
+  }
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #B3B3B3;
+  font-family: serif;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 12px;
+}
+
+.my-tickets {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.arrow-icon {
+  font-size: 14px;
+  color: white; 
+}
+
+.nav-right .nav-link:hover {
+  color: #052f35; 
+}
