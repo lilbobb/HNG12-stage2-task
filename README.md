@@ -95,10 +95,11 @@ Ensure you have the following installed:
 - [Node.js](https://nodejs.org/) (LTS recommended)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-### **Clone the Repository:**
-
 ##📜 License
 This project is open-source and available under the MIT License.
+
+### **Clone the Repository:**
+
 
 ```bash
 git clone https://github.com/your-username/conference-ticket-generator.git
