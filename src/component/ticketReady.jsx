@@ -99,7 +99,7 @@ const TicketReady = () => {
         </div>
       </div>
 
-      <div className="buttons">
+      <div className="buttons ">
         <button
           className="quantity-button"
           onClick={() => navigate("/")}

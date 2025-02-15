@@ -14,19 +14,19 @@ function Navbar() {
       </Link>
 
       <div className="nav-center">
-        <Link to="/events" className="nav-link">
+        <Link to="#" className="nav-link">
           Events
         </Link>
-        <Link to="/my-tickets" className="nav-link">
+        <Link to="#" className="nav-link">
           My Ticket
         </Link>
-        <Link to="/about" className="nav-link">
+        <Link to="#" className="nav-link">
           About Project
         </Link>
       </div>
 
       <div className="nav-right">
-        <Link to="/my-tickets" className="nav-link my-tickets">
+        <Link to="#" className="nav-link my-tickets">
           My Tickets <FaArrowRight />
         </Link>
       </div>

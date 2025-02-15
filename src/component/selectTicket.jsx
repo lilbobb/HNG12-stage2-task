@@ -41,7 +41,7 @@ const SelectTicket = () => {
       <div className="techFest">
         <div className="techFest-content">
           <h1>Techember Fest "25</h1>
-          <p>Join us for an unforgettable experience at <br/>Techember Fest "25! Secure your spot now.</p>
+          <p>Join us for an unforgettable experience at Techember Fest "25! Secure your spot now.</p>
           <p>04 Rumens road, Ikoyi, Lagos || March 15, 2025 | 7:00 PM</p>
         </div>
 
