@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
-import logo from "../assets/logo.png"; 
+import logo from "../assets/logo.png";
 import "./navbar.css";
 
 function Navbar() {
   return (
     <nav className="navbar">
-      <div className="nav-left">
-        <img src={logo} alt="Logo" className="logo" />
-      </div>
+      <Link to="/">
+        {" "}
+        <div className="nav-left">
+          <img src={logo} alt="Logo" className="logo" />
+        </div>
+      </Link>
 
       <div className="nav-center">
         <Link to="/events" className="nav-link">
@@ -28,7 +31,6 @@ function Navbar() {
         </Link>
       </div>
     </nav>
-    
   );
 }
 

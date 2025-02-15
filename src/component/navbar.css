@@ -49,6 +49,12 @@
   background-color: #fff;
   padding: 10px 20px;
   border-radius: 12px;
+
+}
+
+.nav-right:hover{
+  background-color: #197688;
+
 }
 
 .my-tickets {
