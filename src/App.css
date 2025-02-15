@@ -20,7 +20,7 @@ body {
   max-width: 700px;
   margin: 20px auto;
   border: 1px solid #197688;
-  border-radius: 15px;
+  border-radius: 30px;
   padding: 20px;
   color: #f0f0f0;
   background: linear-gradient(#07373f, #041e23);
@@ -34,25 +34,27 @@ body {
 
 .ticketbar {
   margin-bottom: 25px;
+  justify-content: space-between;
 }
 
 .ticket-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: flex-end;
   font-family: serif;
+  width: 100%;
 }
 
 .step {
   font-size: 16px;
   color: #fff;
-  margin-left: 585px;
   padding: 10px;
+  text-align: end;
 }
 
 .ticket-progress-bar {
   height: 5px;
-  background-color: #f0f0f0;
+  background-color: #0e464f;
   max-width: 645px;
   border-radius: 20px;
 }
@@ -60,7 +62,7 @@ body {
 .progress {
   width: 33%;
   height: 100%;
-  background-color: #197688;
+  background-color: #24a0b5;
 }
 
 .techFest {
@@ -68,14 +70,18 @@ body {
   margin: 20px auto;
   background: linear-gradient(
     90deg,
-    #0e464f 0%,
-    #07373f 53%,
+    #0e464f 100%,
+    #07373f 0%,
     #07373f 66%,
-    #0e464f 100%
+    #07373f 53%
   );
   border: 1px solid #197688;
   border-radius: 15px;
   padding: 20px;
+}
+
+.techFest h2 {
+  font-size: 16px;
 }
 
 .techFest-content {
@@ -83,25 +89,26 @@ body {
   align-items: center;
   text-align: center;
   max-width: 680px;
-  margin: 20px auto;
+  margin: 10px auto;
   border: 1px solid #197688;
+  background-image: linear-gradient(to bottom right, #07373f, #02191d);
   border-radius: 15px;
-  padding: 20px;
+  padding: 28px;
   line-height: 1.5;
 }
 
 .techFest-content h1 {
   color: #ffffff;
-  font-family: road rage;
+  font-family: "Road Rage";
   font-size: 60px;
   font-weight: 1000;
 }
 
 .techFest-content p {
   color: #fafafa;
-  font-family: "Poppins", sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 2;
+  opacity: 85%;
 }
 
 #line {
@@ -119,7 +126,7 @@ body {
   padding: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: #07373f;
+  background-color: #052228;
   border: 1px solid #197688;
   border-radius: 15px;
 }
@@ -146,7 +153,7 @@ body {
 
 select {
   width: 100%;
-  height: 40px;
+  height: 50px;
   padding: 10px;
   margin-top: 10px;
   border: 1px solid #197688;
@@ -162,12 +169,15 @@ select:focus {
 .buttons {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+}
+
+.quantity-button{
+  margin: 20px;
 }
 
 .buttons button {
-  width: 300px;
-  height: 40px;
+  width: 100%;
+  height: 50px;
   border: 1px solid #197688;
   border-radius: 10px;
   margin-top: 20px;
@@ -241,9 +251,9 @@ h1 {
 }
 
 .uploaded-image {
-  width: 100%; 
+  width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
@@ -276,13 +286,12 @@ form h2 {
 .form-group {
   width: 100%;
   max-width: 600px;
-  margin-bottom: 20px;
 }
 
 .attendee-form form input,
 .form-textarea {
   width: 100%;
-  height: 48px;
+  height: 50px;
   padding-left: 35px;
   background-color: #062f36;
   border-radius: 12px;
@@ -479,19 +488,44 @@ form h2 {
   display: none;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 480px) {
   .select-ticket {
-    margin: 10px;
-    padding: 20px;
+    width: 90%;
+    background-color: #fff;
+    text-align: center;
+  }
+
+  .select-ticket > h1 {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  select {
+    width: 100%;
   }
 
   .techFest {
-    max-width: 680px;
-    margin: 20px auto;
-    background: none;
-    border-radius: 15px;
-    padding: 20px;
+    width: 100%;
+    padding: 10px;
     border: none;
+  }
+
+  .techFest h2 {
+    text-align: left;
+  }
+
+  .techFest-content {
+    text-align: center;
+    padding: 10px;
+  }
+
+  .techFest-content h1 {
+    font-size: 24px;
+  }
+
+  .techFest-content p {
+    font-size: 12px;
+    padding: 10px;
   }
 
   .attendee-form form {
@@ -500,71 +534,95 @@ form h2 {
 
   .form-input,
   .form-textarea {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .buttons {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    align-items: center;
     gap: 10px;
   }
 
   .quantity-button {
-    width: 20px;
-  }
-
-  .ticket-quantity-button {
-    width: 100%;
-  }
-
-  .ticketbar {
-    width: 300px;
+    width: 30px;
   }
 
   .ready {
-    width: 330px;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    justify-content: center;
-    margin-bottom: 30px;
-    margin: auto;
+    width: 90%;
+    text-align: center;
+    margin: 0 auto 20px;
   }
 
-  .ready h1 {
-    margin-bottom: -30px;
-  }
-
-  .readtext {
-    font-family: serif;
+  .ticket-header {
+    text-align: center;
   }
 
   .ticket-progress-bar {
-    width: 305px;
-    align-items: center;
-    margin: auto;
-  }
-
-  .step {
-    margin-left: 20px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .ticketready {
-    height: 1000px;
-    border: 1px solid #0e464f;
+    height: auto;
     margin: 12px;
-    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
   }
 
   .ticketready > h1 {
-    font-size: 24px;
-    margin-top: 20px;
-    font-family: "Road Rage", sans-serif;
+    font-size: 22px;
   }
 
   .ticketready > p {
     font-size: 14px;
-    line-height: 2;
-    transform: scaleX(1.2);
-    display: inline-block;
+    line-height: 1.5;
   }
+
+  .ticket-type {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .free-ticket {
+    width: 100%;
+    padding: 15px;
+    height: auto;
+    text-align: left;
+    margin: 5px 0;
+  }
+
+  .attendee-section {
+    padding: 8px;
+    border: none;
+    background: none;
+  }
+
+  .attendee-main,
+  h1 {
+    font-family: "Roboto" sans-serif;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .attendee-main {
+    height: 328px;
+    background-color: #062f36;
+    border: 1px solid #0e464f;
+    border-radius: 20px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  .attendee-upload {
+    max-width: 508px;
+    height: 200px;
+    background-color: #041e23;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
 }

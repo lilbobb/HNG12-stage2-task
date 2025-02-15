@@ -7,12 +7,12 @@
   padding: 15px 30px;
   height: 80px;
   background-color: #052f35;
-  border-radius: 24px;
+  border-radius: 16px;
   border: 1px solid #197688;
 }
 
 .nav-left .logo {
-  height: 50px; 
+  height: 40px; 
   width: auto;
 }
 
@@ -23,8 +23,11 @@
   flex-grow: 1;
 }
 
-@media screen and (max-width: 768px) {
-  
+@media screen and (max-width: 480px) {
+  .navbar{
+margin: 10px;
+  }
+
   .nav-center {
     display: none;  
   }
@@ -47,9 +50,8 @@
   display: flex;
   align-items: center;
   background-color: #fff;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-radius: 12px;
-
 }
 
 .nav-right:hover{
