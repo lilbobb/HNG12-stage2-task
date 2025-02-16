@@ -1,14 +1,18 @@
 .navbar {
   display: flex;
+  justify-content: center;
   align-items: center;
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 15px 30px;
+  padding: 16px;
   height: 80px;
-  background-color: #052f35;
+  backdrop-filter: blur(5px);
   border-radius: 16px;
   border: 1px solid #197688;
+  position: sticky;
+  top: 10px;
+  z-index: 1000;
 }
 
 .nav-left .logo {
@@ -25,7 +29,8 @@
 
 @media screen and (max-width: 480px) {
   .navbar{
-margin: 10px;
+margin: 25px;
+padding: 16px;
   }
 
   .nav-center {

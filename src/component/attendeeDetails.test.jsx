@@ -8,7 +8,7 @@
 // vi.mock("axios");
 // vi.mock("./storageHelper", () => ({
 //   saveToStorage: vi.fn(),
-//   getFromStorage: vi.fn(),
+//   getFromStorage: vi.fn(() => null), // Ensure it starts with no stored data
 // }));
 
 // const mockNavigate = vi.fn();
@@ -49,11 +49,11 @@
 //     const nameInput = screen.getByRole("textbox", { name: /enter your name/i });
 //     const emailInput = screen.getByPlaceholderText("hello@ukurowo.io");
 
-//     fireEvent.change(nameInput, { target: { value: "John Doe" } });
-//     fireEvent.change(emailInput, { target: { value: "johndoe@example.com" } });
+//     fireEvent.change(nameInput, { target: { value: "Robert Adoga" } });
+//     fireEvent.change(emailInput, { target: { value: "ukurowo@example.com" } });
 
-//     expect(nameInput.value).toBe("John Doe");
-//     expect(emailInput.value).toBe("johndoe@example.com");
+//     expect(nameInput.value).toBe("Robert Adoga");
+//     expect(emailInput.value).toBe("ukurowo@example.com");
 //   });
 
 //   test("shows validation errors on empty submission", async () => {
@@ -63,14 +63,11 @@
 //       </MemoryRouter>
 //     );
 
-//     fireEvent.click(screen.getByText("Get my free Ticket"));
+//     fireEvent.click(screen.getByTestId("get-ticket"));
 
-//     expect(
-//       await screen.findByText("Full name is required")
-//     ).toBeInTheDocument();
-//     expect(await screen.findByText("Invalid email format")).toBeInTheDocument();
-//     // Check if the avatar validation span exists
-//     expect(screen.getByText("Invalid avatar URL")).toBeInTheDocument();
+//     expect(await screen.findByTestId("Full name is required")).toBeInTheDocument();
+//     expect(await screen.findByTestId("Email is required")).toBeInTheDocument();
+//     expect(screen.getByTestId("Invalid avatar URL")).toBeInTheDocument();
 //   });
 
 //   test("uploads an image and updates the form", async () => {
@@ -88,9 +85,7 @@
 //       data: { secure_url: "https://mocked.cloudinary.com/avatar.png" },
 //     });
 
-//     const fileInput = screen.getByLabelText("Drag & drop or click to upload", {
-//       selector: "input",
-//     });
+//     const fileInput = screen.getByTestId("imageInput");
 //     fireEvent.change(fileInput, { target: { files: [file] } });
 
 //     await waitFor(() => {
@@ -117,16 +112,30 @@
 
 //     fireEvent.change(
 //       screen.getByRole("textbox", { name: /enter your name/i }),
-//       { target: { value: "John Doe" } }
+//       { target: { value: "Robert Adoga" } }
 //     );
 //     fireEvent.change(screen.getByPlaceholderText("hello@ukurowo.io"), {
-//       target: { value: "john@example.com" },
+//       target: { value: "ukurowo@example.com" },
 //     });
 
-//     fireEvent.click(screen.getByText("Get my free Ticket"));
+//     fireEvent.click(screen.getByTestId("get-ticket"));
 
 //     await waitFor(() => {
 //       expect(mockNavigate).toHaveBeenCalledWith("/ticketready");
+//     });
+//   });
+
+//   test("does not navigate if form is invalid", async () => {
+//     render(
+//       <MemoryRouter>
+//         <AttendeeDetails />
+//       </MemoryRouter>
+//     );
+
+//     fireEvent.click(screen.getByTest("get-ticket"));
+
+//     await waitFor(() => {
+//       expect(mockNavigate).not.toHaveBeenCalled();
 //     });
 //   });
 // });

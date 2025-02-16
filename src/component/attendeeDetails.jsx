@@ -17,12 +17,15 @@ const AttendeeDetails = () => {
 
   useEffect(() => {
     const savedData = getFromStorage("attendeeData");
-    if (savedData) setFormData((prev) => ({ ...prev, ...savedData }));
+    if (savedData) {
+      setFormData((prev) => ({ ...prev, ...savedData }));
+    }
   }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -39,12 +42,20 @@ const AttendeeDetails = () => {
       const imageUrl = response.data.secure_url;
 
       setFormData((prev) => {
-        const updatedData = { ...prev, avatar: imageUrl };
+        const updatedData = {
+          ...prev,
+          avatar: imageUrl,
+          errors: { ...prev.errors, avatar: "" },
+        };
         saveToStorage("attendeeData", updatedData);
         return updatedData;
       });
     } catch (error) {
       console.error("Image upload failed", error.response?.data || error);
+      setFormData((prev) => ({
+        ...prev,
+        errors: { ...prev.errors, avatar: "Image upload failed. Try again." },
+      }));
     }
   };
 
@@ -56,8 +67,11 @@ const AttendeeDetails = () => {
     if (!/^https?:\/\/.+/.test(formData.avatar))
       errors.avatar = "Invalid avatar URL";
 
-    setFormData((prev) => ({ ...prev, errors }));
-    return Object.keys(errors).length === 0;
+    if (Object.keys(errors).length > 0) {
+      setFormData((prev) => ({ ...prev, errors }));
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = (e) => {
@@ -83,13 +97,12 @@ const AttendeeDetails = () => {
               <FaCloudArrowDown />
               <p>Drag & drop or click to upload</p>
               <input
-                id="imageInput"
+                data-testid="imageInput"
                 type="file"
                 accept="image/*"
                 hidden
                 onChange={handleImageUpload}
               />
-
               {formData.avatar && (
                 <img
                   src={formData.avatar}
@@ -97,6 +110,7 @@ const AttendeeDetails = () => {
                   className="uploaded-image"
                 />
               )}
+              {formData.errors.avatar && <span>{formData.errors.avatar}</span>}
             </div>
           </div>
         </div>
@@ -105,8 +119,9 @@ const AttendeeDetails = () => {
         <div className="attendee-form">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <h2>Enter Your Name</h2>
+              <label htmlFor="fullName">Enter Your Name</label>
               <input
+                id="fullName"
                 className="form-input"
                 type="text"
                 name="fullName"
@@ -119,10 +134,11 @@ const AttendeeDetails = () => {
             </div>
 
             <div className="form-group">
-              <h2>Enter Your Email</h2>
+              <label htmlFor="email">Enter Your Email</label>
               <div className="input-container">
                 <FaEnvelope className="input-icon" />
                 <input
+                  id="email"
                   className="form-input"
                   type="email"
                   name="email"
@@ -135,7 +151,7 @@ const AttendeeDetails = () => {
             </div>
 
             <div className="form-group">
-              <h2>Special Request</h2>
+            <label htmlFor="email">Special Request</label>
               <textarea
                 className="form-textarea"
                 name="specialRequest"
@@ -146,7 +162,12 @@ const AttendeeDetails = () => {
             </div>
 
             <div className="buttons">
-              <button className="quantity-button" onClick={() => navigate("/")}>
+              <button
+                type="button"
+                className="quantity-button"
+                data-testid="get-ticket"
+                onClick={() => navigate("/")}
+              >
                 Back
               </button>
               <button type="submit" className="quantity-button">
