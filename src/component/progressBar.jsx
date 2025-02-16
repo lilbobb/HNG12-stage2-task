@@ -1,5 +1,11 @@
 import React from "react";
 
+const stepTitles = {
+  1: "Ticket Selection",
+  2: "Attendee Details",
+  3: "Confirm & Get Ticket",
+};
+
 const ProgressBar = ({ currentStep, totalSteps }) => {
   const safeCurrentStep = Math.max(0, Math.min(currentStep, totalSteps));
   const progressPercentage =
@@ -8,6 +14,10 @@ const ProgressBar = ({ currentStep, totalSteps }) => {
   return (
     <div className="ticketbar">
       <div className="ticket-header">
+        <h2 className="ticket-title">
+          {stepTitles[safeCurrentStep] || "Step Progress"}
+        </h2>
+
         <span className="step">
           Step {safeCurrentStep}/{totalSteps}
         </span>

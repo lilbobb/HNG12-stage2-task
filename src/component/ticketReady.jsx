@@ -44,8 +44,9 @@ const TicketReady = () => {
   return (
     <div className="ticketready">
       <div className="ready">
-        <h1 className="readtext">Ready</h1>
-        <ProgressBar currentStep={3} totalSteps={3} />
+        <div>
+          <ProgressBar currentStep={3} totalSteps={3} />
+        </div>
       </div>
       <h1>Your Ticket is Booked!</h1>
       <p>
@@ -100,10 +101,7 @@ const TicketReady = () => {
       </div>
 
       <div className="buttons ">
-        <button
-          className="quantity-button"
-          onClick={() => navigate("/")}
-        >
+        <button className="quantity-button" onClick={() => navigate("/")}>
           Book Another Ticket
         </button>
         <button className="quantity-button" onClick={handleDownload}>

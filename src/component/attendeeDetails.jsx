@@ -15,6 +15,8 @@ const AttendeeDetails = () => {
     errors: {},
   });
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const savedData = getFromStorage("attendeeData");
     if (savedData) {
@@ -22,8 +24,38 @@ const AttendeeDetails = () => {
     }
   }, []);
 
+  const validateForm = () => {
+    let errors = {};
+
+    if (!formData.fullName.trim()) {
+      errors.fullName = "Full name is required.";
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = "Email is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = "Invalid email format.";
+    }
+
+    if (!formData.avatar) {
+      errors.avatar = "Profile photo is required.";
+    }
+
+    setFormData((prev) => ({ ...prev, errors }));
+    return Object.keys(errors).length === 0; // Returns true if no errors
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      saveToStorage("attendeeData", formData);
+      navigate("/ticketready");
+    }
   };
 
   const handleImageUpload = async (e) => {
@@ -33,6 +65,8 @@ const AttendeeDetails = () => {
     const uploadData = new FormData();
     uploadData.append("file", file);
     uploadData.append("upload_preset", "HNG12-task");
+
+    setLoading(true);
 
     try {
       const response = await axios.post(
@@ -50,66 +84,56 @@ const AttendeeDetails = () => {
         saveToStorage("attendeeData", updatedData);
         return updatedData;
       });
+
+      setLoading(false);
     } catch (error) {
       console.error("Image upload failed", error.response?.data || error);
       setFormData((prev) => ({
         ...prev,
         errors: { ...prev.errors, avatar: "Image upload failed. Try again." },
       }));
-    }
-  };
-
-  const validate = () => {
-    let errors = {};
-    if (!formData.fullName.trim()) errors.fullName = "Full name is required";
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(formData.email))
-      errors.email = "Invalid email format";
-    if (!/^https?:\/\/.+/.test(formData.avatar))
-      errors.avatar = "Invalid avatar URL";
-
-    if (Object.keys(errors).length > 0) {
-      setFormData((prev) => ({ ...prev, errors }));
-      return false;
-    }
-    return true;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      saveToStorage("attendeeData", formData);
-      navigate("/ticketready");
+      setLoading(false);
     }
   };
 
   return (
     <div className="select-ticket">
-      <h1>Attendee Details</h1>
-      <ProgressBar currentStep={2} totalSteps={3} />
+      <div>
+        <ProgressBar currentStep={2} totalSteps={3} />
+      </div>
       <div className="attendee-section">
         <div className="attendee-main">
           <h1>Upload Profile Photo</h1>
           <div className="attendee-upload">
             <div
               className="image-upload"
-              onClick={() => document.getElementById("imageInput").click()}
+              onClick={() => document.querySelector("#imageInput").click()}
             >
-              <FaCloudArrowDown />
-              <p>Drag & drop or click to upload</p>
+              {!loading && !formData.avatar && (
+                <>
+                  <FaCloudArrowDown />
+                  <p>Drag & drop or click to upload</p>
+                </>
+              )}
+
               <input
-                data-testid="imageInput"
+                id="imageInput"
                 type="file"
                 accept="image/*"
                 hidden
                 onChange={handleImageUpload}
               />
-              {formData.avatar && (
+
+              {loading && <p className="uploading-text">Uploading...</p>}
+
+              {!loading && formData.avatar && (
                 <img
                   src={formData.avatar}
                   alt="Uploaded"
                   className="uploaded-image"
                 />
               )}
+
               {formData.errors.avatar && <span>{formData.errors.avatar}</span>}
             </div>
           </div>
@@ -129,7 +153,7 @@ const AttendeeDetails = () => {
                 onChange={handleChange}
               />
               {formData.errors.fullName && (
-                <span>{formData.errors.fullName}</span>
+                <span className="error-text">{formData.errors.fullName}</span>
               )}
             </div>
 
@@ -147,12 +171,15 @@ const AttendeeDetails = () => {
                   placeholder="hello@ukurowo.io"
                 />
               </div>
-              {formData.errors.email && <span>{formData.errors.email}</span>}
+              {formData.errors.email && (
+                <span className="error-text">{formData.errors.email}</span>
+              )}
             </div>
 
             <div className="form-group">
-            <label htmlFor="email">Special Request</label>
+              <label htmlFor="specialRequest">Special Request</label>
               <textarea
+                id="specialRequest"
                 className="form-textarea"
                 name="specialRequest"
                 value={formData.specialRequest}
@@ -170,7 +197,11 @@ const AttendeeDetails = () => {
               >
                 Back
               </button>
-              <button type="submit" className="quantity-button">
+              <button
+                type="submit"
+                className="quantity-button"
+                data-testid="get-ticket"
+              >
                 Get my free Ticket
               </button>
             </div>

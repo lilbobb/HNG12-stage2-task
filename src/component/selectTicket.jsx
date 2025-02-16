@@ -6,6 +6,7 @@ const SelectTicket = () => {
   const navigate = useNavigate();
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [ticketNumber, setTicketNumber] = useState(1);
+  const [error, setError] = useState(""); // New error state
 
   const tickets = [
     { type: "Free", access: "REGULAR ACCESS", remaining: "20/52" },
@@ -15,33 +16,42 @@ const SelectTicket = () => {
 
   const handleTicketSelect = (ticketType) => {
     setSelectedTicket(ticketType);
+    setError(""); // Clear error when a ticket is selected
   };
+
   const handleProceed = () => {
-    if (selectedTicket) {
-      const selectedTicketObject = tickets.find(
-        (ticket) => ticket.type === selectedTicket
-      );
-
-      const ticketData = {
-        ticketType: selectedTicketObject.type,
-        access: selectedTicketObject.access, 
-        ticketQuantity: ticketNumber,
-      };
-
-      localStorage.setItem("ticketData", JSON.stringify(ticketData));
-      navigate("/attendeedetails");
+    if (!selectedTicket) {
+      setError("Please select a ticket type before proceeding.");
+      return;
     }
+
+    const selectedTicketObject = tickets.find(
+      (ticket) => ticket.type === selectedTicket
+    );
+
+    const ticketData = {
+      ticketType: selectedTicketObject.type,
+      access: selectedTicketObject.access,
+      ticketQuantity: ticketNumber,
+    };
+
+    localStorage.setItem("ticketData", JSON.stringify(ticketData));
+    navigate("/attendeedetails");
   };
 
   return (
     <div className="select-ticket">
-      <h1>Ticket Selection</h1>
-      <ProgressBar currentStep={1} totalSteps={3} />
+      <div>
+        <ProgressBar currentStep={1} totalSteps={3} />
+      </div>
 
       <div className="techFest">
         <div className="techFest-content">
           <h1>Techember Fest "25</h1>
-          <p>Join us for an unforgettable experience at Techember Fest "25! Secure your spot now.</p>
+          <p>
+            Join us for an unforgettable experience at Techember Fest "25!
+            Secure your spot now.
+          </p>
           <p>04 Rumens road, Ikoyi, Lagos || March 15, 2025 | 7:00 PM</p>
         </div>
 
@@ -64,6 +74,8 @@ const SelectTicket = () => {
           ))}
         </div>
 
+        {error && <p className="error-text">{error}</p>}
+
         <h2>Number of Tickets:</h2>
         <select
           className="select"
@@ -81,17 +93,14 @@ const SelectTicket = () => {
           <button
             className="ticket-quantity-button"
             onClick={() => {
-              setSelectedTicket(null); 
-              setTicketNumber(1); 
+              setSelectedTicket(null);
+              setTicketNumber(1);
+              setError(""); // Reset error when canceling
             }}
           >
             Cancel
           </button>
-          <button
-            className="ticket-quantity-button"
-            onClick={handleProceed}
-            disabled={!selectedTicket}
-          >
+          <button className="ticket-quantity-button" onClick={handleProceed}>
             Next
           </button>
         </div>
