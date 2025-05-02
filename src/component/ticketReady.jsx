@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import html2canvas from "html2canvas";
 import BarCode from "../assets/BarCode.png";
 import { getFromStorage } from "./storageHelper";
 import subtract from "../assets/Subtract.png";
@@ -25,40 +26,40 @@ const TicketReady = () => {
   const avatarUrl = attendee.avatar || defaultAvatar;
 
   const handleDownload = () => {
-    const ticketData = `
-      Event: Techember Fest '25
-      Location: 04 Rumens road, Ikoyi, Lagos.
-      Date: March 15, 2025 | 7:00 PM
-      Name: ${attendee.fullName || "N/A"}
-      Email: ${attendee.email || "N/A"}
-      Special Request: ${attendee.specialRequest || "None"}
-    `;
-    JSON.parse(localStorage.getItem("ticketData")) || {};
-    const blob = new Blob([ticketData], { type: "text/plain" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "Techember_Ticket.txt";
-    link.click();
+    const ticketElement = document.getElementById("ticket-container");
+
+    if (ticketElement) {
+      html2canvas(ticketElement, {
+        scale: 3, // Increase scale for better quality
+        useCORS: true, // Ensure external images load
+        allowTaint: true,
+        logging: false,
+        backgroundColor: null, // Preserve transparency
+      }).then((canvas) => {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "Techember_Ticket.png";
+        link.click();
+      });
+    }
   };
 
   return (
     <div className="ticketready">
       <div className="ready">
-        <div>
-          <ProgressBar currentStep={3} totalSteps={3} />
-        </div>
+        <ProgressBar currentStep={3} totalSteps={3} />
       </div>
       <h1>Your Ticket is Booked!</h1>
       <p>
         Check your email for a copy or you can <strong>download</strong>
       </p>
 
-      <div className="ticketready-main">
+      <div className="ticketready-main" id="ticket-container">
         <img src={subtract} className="background-image" alt="Background" />
 
         <div className="container">
           <div className="content">
-            <h1>Techember Fest "25</h1>
+            <h1>Techember Fest '25</h1>
             <p>
               <FaMapPin /> 04 Rumens road, Ikoyi, Lagos.
             </p>
@@ -100,7 +101,7 @@ const TicketReady = () => {
         </div>
       </div>
 
-      <div className="buttons ">
+      <div className="buttons">
         <button className="quantity-button" onClick={() => navigate("/")}>
           Book Another Ticket
         </button>

@@ -446,16 +446,15 @@ label {
 
 .ticketready h1 {
   font-size: 32px;
-  margin-top: 20px;
   font-family: "Alatsi", sans-serif;
   font-weight: 100;
-  margin: 10px;
 }
 
 .ticketready p {
-  font-size: 15px;
-  padding: 3px;
-  line-height: 2;
+  font-size: 16px;
+  padding: 5px;
+  line-height: 150%;
+  margin: 10px;
   transform: scaleX(1.2);
   display: inline-block;
 }
@@ -476,7 +475,7 @@ label {
 
 .background-image {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: -1;
@@ -492,7 +491,7 @@ label {
   height: 446px;
   border: 1px solid #197688;
   position: absolute;
-  margin-top: 50px;
+  margin-bottom: 110px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -591,7 +590,7 @@ label {
 }
 
 .barcode {
-  margin-top: 330px;
+  margin-top: 250px;
   width: 245px;
 }
 

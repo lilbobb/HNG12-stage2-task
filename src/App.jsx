@@ -7,6 +7,7 @@ import Countdown from "./component/countDown";
 import Navbar from "./component/nav";
 import { CartProvider } from "./component/cartContext.jsx";
 import "./App.css";
+import AboutPage from "./component/about.jsx";
 
 const App = () => {
   const [showCountdown, setShowCountdown] = useState(true);
@@ -33,6 +34,7 @@ const App = () => {
                   <Route path="/" element={<SelectTicket />} />
                   <Route path="attendeedetails" element={<AttendeeDetails />} />
                   <Route path="ticketReady" element={<TicketReady />} />
+                  <Route path="about" element={<AboutPage />} />
                 </Routes>
               </main>
             </>
