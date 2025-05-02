@@ -102,6 +102,6 @@ This project is open-source and available under the MIT License.
 
 
 ```bash
-git clone https://github.com/your-username/conference-ticket-generator.git
+git clone https://github.com/lilbobb/conference-ticket-generator.git
 cd conference-ticket-generator
 
